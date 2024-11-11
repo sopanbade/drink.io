@@ -1,0 +1,221 @@
+<html>
+ <head>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <script>
+   function showAddressForm() {
+            document.getElementById('product-page').classList.add('hidden');
+            document.getElementById('address-form').classList.remove('hidden');
+        }
+
+        function showPaymentPage() {
+            document.getElementById('address-form').classList.add('hidden');
+            document.getElementById('payment-page').classList.remove('hidden');
+        }
+
+        function showOrderConfirmation() {
+            document.getElementById('payment-page').classList.add('hidden');
+            document.getElementById('order-confirmation').classList.remove('hidden');
+            sendWhatsAppMessage();
+        }
+
+        function sendWhatsAppMessage() {
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const country = document.getElementById('country').value;
+            const state = document.getElementById('state').value;
+            const village = document.getElementById('village').value;
+            const mobile = document.getElementById('mobile').value;
+            const quantity = document.getElementById('quantity').value;
+            const message = `Order Details:\nName: ${name}\nAddress: ${address}\nCountry: ${country}\nState: ${state}\nVillage: ${village}\nMobile: ${mobile}\nQuantity: ${quantity}`;
+            const whatsappUrl = `https://wa.me/918767244752?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            let quantity = parseInt(quantityInput.value);
+            quantityInput.value = quantity + 1;
+        }
+
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            let quantity = parseInt(quantityInput.value);
+            if (quantity > 1) {
+                quantityInput.value = quantity - 1;
+            }
+        }
+  </script>
+ </head>
+ <body class="bg-white">
+  <div class="max-w-md mx-auto">
+   <!-- Product Page -->
+   <div id="product-page">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4">
+     <i class="fas fa-arrow-left text-xl">
+     </i>
+     <div class="flex items-center space-x-4">
+      <i class="fas fa-search text-xl">
+      </i>
+      <div class="relative">
+       <i class="fas fa-shopping-cart text-xl">
+       </i>
+       <span class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1.5">
+        15
+       </span>
+      </div>
+     </div>
+    </div>
+    <!-- Product Info -->
+    <div class="p-4">
+     <div class="flex justify-between items-center">
+      <div>
+       <p class="text-gray-600">
+        नाव :- CAN DRINK
+       </p>
+       <div class="flex items-center space-x-2">
+        <p class="text-green-600 text-lg font-bold">
+         67%
+        </p>
+        <p class="line-through text-gray-500">
+         1,399
+        </p>
+        <p class="text-black text-lg font-bold">
+         ₹449
+        </p>
+       </div>
+      </div>
+      <p class="text-gray-400">
+       Sponsored
+      </p>
+     </div>
+     <!-- Product Image -->
+     <div class="my-4">
+      <img alt="A bottle of Mountain Dew drink with green leaves in the background" class="w-full" height="800" src="https://storage.googleapis.com/a1aa/image/rJEhMFTKLiqfciQBsOwzv5zLwHqVPvyrNxflqXU19CNQd6tTA.jpg" width="600"/>
+     </div>
+     <!-- Product Description -->
+     <p class="text-gray-800 text-lg">
+      मराठी माणसाचा आवड असलेला ब्रँड.
+     </p>
+     <!-- Price and Discount -->
+     <div class="flex justify-between items-center my-4">
+      <div>
+       <p class="text-gray-600">
+       ही पाऊडर आहे  पाण्यात किंवा लिंबू पाण्यात मिसळून पिऊ शकता  
+       पार्टीमध्ये किंवा विशेष प्रसंगी पिऊ शकता.
+
+       </p>
+       <div class="flex items-center space-x-2">
+        <p class="text-green-600 text-lg font-bold">
+         67%
+        </p>
+        <p class="line-through text-gray-500">
+         1,399
+        </p>
+        <p class="text-black text-lg font-bold">
+         ₹449
+        </p>
+       </div>
+      </div>
+     </div>
+     <!-- Quantity Selector -->
+     <div class="flex items-center space-x-4 my-4">
+      <label class="text-gray-700">Quantity:</label>
+      <div class="flex items-center space-x-2">
+       <button class="bg-gray-200 text-gray-700 px-2 py-1 rounded" onclick="decreaseQuantity()">-</button>
+       <input class="border border-gray-300 p-2 rounded w-12 text-center" id="quantity" type="number" value="1" min="1"/>
+       <button class="bg-gray-200 text-gray-700 px-2 py-1 rounded" onclick="increaseQuantity()">+</button>
+      </div>
+     </div>
+     <!-- Buttons -->
+     <div class="flex space-x-4">
+      <button class="flex-1 bg-black text-white py-2 rounded">
+       कार्टमध्ये टाका
+      </button>
+      <button class="flex-1 bg-yellow-500 text-black py-2 rounded" onclick="showAddressForm()">
+       आता खरेदी करा
+      </button>
+     </div>
+    </div>
+   </div>
+   <!-- Address Form -->
+   <div class="hidden p-4" id="address-form">
+    <h2 class="text-xl font-bold mb-4">
+     Enter Address Details
+    </h2>
+    <form>
+     <div class="mb-4">
+      <label class="block text-gray-700">
+       Name
+      </label>
+      <input class="w-full border border-gray-300 p-2 rounded" id="name" placeholder="Enter your name" type="text"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700">
+       Address
+      </label>
+      <input class="w-full border border-gray-300 p-2 rounded" id="address" placeholder="Enter your address" type="text"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700">
+       Country
+      </label>
+      <input class="w-full border border-gray-300 p-2 rounded" id="country" placeholder="Enter your country" type="text"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700">
+       State
+      </label>
+      <input class="w-full border border-gray-300 p-2 rounded" id="state" placeholder="Enter your state" type="text"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700">
+       Village
+      </label>
+      <input class="w-full border border-gray-300 p-2 rounded" id="village" placeholder="Enter your village" type="text"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700">
+       Mobile Number
+      </label>
+      <input class="w-full border border-gray-300 p-2 rounded" id="mobile" placeholder="Enter your mobile number" type="text"/>
+     </div>
+     <button class="w-full bg-yellow-500 text-black py-2 rounded" onclick="showPaymentPage()" type="button">
+      Proceed to Payment
+     </button>
+    </form>
+   </div>
+   <!-- Payment Page -->
+   <div class="hidden p-4" id="payment-page">
+    <h2 class="text-xl font-bold mb-4">
+     Payment Options
+    </h2>
+    <div class="mb-4">
+     <label class="block text-gray-700">
+      Select Payment Method
+     </label>
+     <div class="flex items-center space-x-2">
+      <input class="h-4 w-4" id="cod" name="payment" type="radio"/>
+      <label class="text-gray-700" for="cod">
+       Cash on Delivery
+      </label>
+     </div>
+    </div>
+    <button class="w-full bg-yellow-500 text-black py-2 rounded" onclick="showOrderConfirmation()" type="button">
+     Place Order
+    </button>
+   </div>
+   <!-- Order Confirmation -->
+   <div class="hidden p-4" id="order-confirmation">
+    <h2 class="text-xl font-bold mb-4">
+     Order Submitted
+    </h2>
+    <p class="text-gray-700">
+     Thank you for your order!
+    </p>
+   </div>
+  </div>
+ </body>
+</html>
